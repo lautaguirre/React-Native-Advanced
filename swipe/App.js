@@ -41,6 +41,8 @@ class App extends Component {
         <Deck
           data={DATA}
           renderCard={this.renderCard.bind(this)}
+          onSwipeRight={() => console.log('swipeRight')}
+          onSwipeLeft={() => console.log('swipeLeft')}
         />
       </View>
     );
