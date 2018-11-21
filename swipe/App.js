@@ -19,12 +19,10 @@ class App extends Component {
   renderCard(item) {
     return (
       <Card
-        title={item.text}
         image={{ uri: item.uri }}
-        key={item.text}
       >
         <Text style={{ marginBottom: 10 }}>
-          Text
+          {item.text}
         </Text>
         <Button
           icon={{ name: 'code' }}
@@ -35,14 +33,27 @@ class App extends Component {
     );
   }
 
+  renderNoMoreCards() {
+    return (
+      <Card title="All Done!">
+        <Text style={{ marginBottom: 10 }}>
+          There is no more content here!
+        </Text>
+        <Button
+          backgroundColor="#03A9F4"
+          title="Get More!"
+        />
+      </Card>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Deck
           data={DATA}
           renderCard={this.renderCard.bind(this)}
-          onSwipeRight={() => console.log('swipeRight')}
-          onSwipeLeft={() => console.log('swipeLeft')}
+          renderNoMoreCards={this.renderNoMoreCards.bind(this)}
         />
       </View>
     );
