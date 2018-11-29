@@ -47,7 +47,7 @@ class Deck extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.data !== this.props.data) {
-      this.state({ index: 0 })
+      this.state({ index: 0 });
     }
   }
 
