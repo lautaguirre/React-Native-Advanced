@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
@@ -12,7 +12,7 @@ import DeckScreen from './screens/DeckScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ReviewScreen from './screens/ReviewScreen';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     const MainNavigator = createBottomTabNavigator({
       welcome: {
@@ -30,6 +30,12 @@ export default class App extends React.Component {
             settings: { screen: SettingsScreen }
           })
         })
+      }
+    }, {
+      tabBarComponent: () => {
+        return (
+          <View></View>
+        )
       }
     });
 
