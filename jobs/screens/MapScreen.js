@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { MapView } from 'expo';
+import { MapView, Permissions } from 'expo';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 
@@ -14,6 +14,10 @@ class MapScreen extends Component {
       longitudeDelta: 0.04,
       latitudeDelta: 0.09
     }
+  }
+
+  async componentDidMount() {
+    await Permissions.askAsync(Permissions.LOCATION);
   }
 
   onRegionChangeComplete = region => {

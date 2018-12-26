@@ -1,12 +1,30 @@
 import axios from 'axios';
+import { Location } from 'expo';
+import qs from 'qs';
 
 import {
   FETCH_JOBS
 } from './types';
 
+const JOB_ROOT_URL = 'https://authenticjobs.com/api/?';
+const JOB_QUERY_PARAMS = {
+  api_key:'bd30dde2e8c818a9792851aef058eeae',
+  method: 'aj.jobs.search',
+  perpage: '15',
+  format: 'json',
+};
+
+const buildJobsUrl = zip => {
+  const query = qs.stringify(JOB_QUERY_PARAMS);
+
+  return `${JOB_ROOT_URL}${query}`;
+};
+
 export const fetchJobs = (region, callback) => async dispatch => {
   try {
-    const url = `https://jobs.github.com/positions.json?lat=${region.latitude}&long=${region.longitude}`;
+    let zip = await Location.reverseGeocodeAsync(region);
+
+    const url = buildJobsUrl(zip);
 
     let { data } = await axios.get(url);
 
