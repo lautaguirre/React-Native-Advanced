@@ -28,9 +28,9 @@ export const fetchJobs = (region, callback) => async dispatch => {
 
     let { data } = await axios.get(url);
 
-    const filteredData = data.listings.listing.filter(item => item.company.location && item.company.location.lat);
+    // const filteredData = data.listings.listing.filter(item => item.company.location && item.company.location.lat);
 
-    dispatch({ type: FETCH_JOBS, payload: filteredData });
+    dispatch({ type: FETCH_JOBS, payload: data.listings.listing });
 
     callback();
   } catch (e) {
