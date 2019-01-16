@@ -14,7 +14,7 @@ class Swipe extends Component {
 
   render() {
     return(
-      <View>
+      <View style={{ marginTop: 25 }} >
         {this.renderCards()}
       </View>
     );

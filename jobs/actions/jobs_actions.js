@@ -3,7 +3,8 @@ import { Location } from 'expo';
 import qs from 'qs';
 
 import {
-  FETCH_JOBS
+  FETCH_JOBS,
+  LIKE_JOB,
 } from './types';
 
 const JOB_ROOT_URL = 'https://authenticjobs.com/api/?';
@@ -37,3 +38,10 @@ export const fetchJobs = (region, callback) => async dispatch => {
     console.error(e);
   }
 }
+
+export const likeJob = (payload) => {
+  return {
+    type: LIKE_JOB,
+    payload
+  }
+};

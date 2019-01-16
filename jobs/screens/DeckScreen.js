@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import { Card, Button } from 'react-native-elements'
+
+import * as actions from '../actions';
 
 import Swipe from '../components/Swipe';
 
@@ -40,6 +42,20 @@ class DeckScreen extends Component {
         <Text>
           {job.description.substring(0, 140)}
         </Text>
+        <View style={styles.buttonsWrapper}>
+          <Button
+            title="Reject"
+            backgroundColor="red"
+            icon={{ name: 'times', type: 'font-awesome' }}
+            onPress={this.onButtonPress}
+          />
+          <Button
+            title="Like"
+            backgroundColor="#009688"
+            icon={{ name: 'heart', type: 'font-awesome' }}
+            onPress={() => this.props.likeJob(job)}
+          />
+        </View>
       </Card>
     );
   }
@@ -66,7 +82,13 @@ const styles = StyleSheet.create({
   detailWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10
+    marginBottom: 10,
+    marginTop: 10
+  },
+  buttonsWrapper: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   }
 });
 
@@ -76,4 +98,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(DeckScreen);
+export default connect(mapStateToProps, actions)(DeckScreen);
