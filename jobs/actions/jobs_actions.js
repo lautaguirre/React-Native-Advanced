@@ -5,6 +5,8 @@ import qs from 'qs';
 import {
   FETCH_JOBS,
   LIKE_JOB,
+  REJECT_JOB,
+  CLEAR_LIKED_JOBS,
 } from './types';
 
 const JOB_ROOT_URL = 'https://authenticjobs.com/api/?';
@@ -37,11 +39,24 @@ export const fetchJobs = (region, callback) => async dispatch => {
   } catch (e) {
     console.error(e);
   }
-}
+};
+
+export const rejectJob = (payload) => {
+  return {
+    type: REJECT_JOB,
+    payload
+  };
+};
 
 export const likeJob = (payload) => {
   return {
     type: LIKE_JOB,
     payload
+  };
+};
+
+export const clearLikedJobs = () => {
+  return {
+    type: CLEAR_LIKED_JOBS
   }
 };

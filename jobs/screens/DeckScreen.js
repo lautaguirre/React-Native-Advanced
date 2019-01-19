@@ -18,7 +18,7 @@ class DeckScreen extends Component {
   renderCard(job) {
     const initialRegion =  {
       latitude: job.company.lat ? job.company.lat : -32.9539569,
-      longitude: job.company.lat ? job.company.lng : -60.6331856,
+      longitude: job.company.lng ? job.company.lng : -60.6331856,
       latitudeDelta: 0.045,
       longitudeDelta: 0.02,
     };
@@ -29,7 +29,7 @@ class DeckScreen extends Component {
           <MapView
             scrollEnabled={false}
             style={{ flex: 1 }}
-            cacheEnabled={true}
+            cacheEnabled
             initialRegion={initialRegion}
           >
           </MapView>
@@ -47,7 +47,7 @@ class DeckScreen extends Component {
             title="Reject"
             backgroundColor="red"
             icon={{ name: 'times', type: 'font-awesome' }}
-            onPress={this.onButtonPress}
+            onPress={() => this.props.rejectJob(job)}
           />
           <Button
             title="Like"

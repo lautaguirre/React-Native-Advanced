@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
 import {
-  LIKE_JOB
+  LIKE_JOB,
+  CLEAR_LIKED_JOBS,
 } from '../actions/types';
 
 export default (state = [], action) => {
@@ -10,6 +11,8 @@ export default (state = [], action) => {
       return _.uniqBy([
         action.payload, ...state
       ], 'id');
+    case CLEAR_LIKED_JOBS:
+      return [];
     default:
       return state;
   }
