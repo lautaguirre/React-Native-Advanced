@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
+import { Icon } from 'react-native-elements';
+import Expo, { Notifications } from 'expo';
 
 import store from './store';
 
+import registerForNotifications from './services/push_notifications';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MapScreen from './screens/MapScreen';
@@ -13,6 +16,22 @@ import SettingsScreen from './screens/SettingsScreen';
 import ReviewScreen from './screens/ReviewScreen';
 
 export default class App extends Component {
+  componentDidMount() {
+    registerForNotifications();
+
+    Notifications.addListener((notification) => {
+      const { data: { text }, origin } = notification;
+
+      if (origin === 'received' && text) {
+        Alert.alert(
+          'New Push Notification',
+          text,
+          [{ text: 'Ok' }]
+        );
+      }
+    });
+  }
+
   render() {
     const MainNavigator = createBottomTabNavigator({
       welcome: {
@@ -28,7 +47,18 @@ export default class App extends Component {
           review: createStackNavigator({
             review: { screen: ReviewScreen },
             settings: { screen: SettingsScreen }
+          }, {
+            navigationOptions: {
+              title: 'Review Jobs',
+              tabBarIcon: ({ tintColor }) => (
+                <Icon name="favorite" size={25} color={tintColor} />
+              )
+            }
           })
+        }, {
+          tabBarOptions: {
+            labelStyle: { fontSize: 12 }
+          }
         })
       }
     }, {

@@ -6,7 +6,7 @@ import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
   static navigationOptions =  ({ navigation }) => ({
-    title: 'ReviewJobs',
+    title: 'Review Jobs',
     headerRight: (
       <Button
         title="Settings"
@@ -15,7 +15,7 @@ class ReviewScreen extends Component {
         color="rgba(0, 122, 255, 1)"
       />
     )
-  })
+  });
 
   renderLikedJobs() {
     return this.props.likedJobs.map(job => {
